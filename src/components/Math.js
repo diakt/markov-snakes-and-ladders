@@ -1,8 +1,18 @@
 import React from 'react';
+var Latex = require('react-latex');
 
-function Math(props) {
+function Math() {
+    const fraction = '$$\\frac{1}{2}$$'
     return (
-        <div>
+        <div className='Math'>
+            <h2>Math of Snakes and Ladders</h2>
+            <article className='latex-section'>
+                <Latex>What is $(3\times 4) \div (5-3)?$</Latex>
+
+
+
+
+            </article>
             
         </div>
     );

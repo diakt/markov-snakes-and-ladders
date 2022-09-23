@@ -5,6 +5,7 @@ import Dice from './Dice';
 function Home() {
     return (
         <div className='Home'>
+            <h2 class = "game-title">A representation of Snakes and Ladders</h2>
 
             <Board />
             

@@ -179,12 +179,41 @@ main {
   align-items: center;
   width: 20vw;
   margin-left: 2vw;
+  background-color: white;
 
 
   font-size: 100%;
 
   border-style: solid;
 }
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+.Math {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90vw;
+  height: 100vh;
+  overflow-y: auto;
+
+
+}
+
+.latex-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: white;
+  width: 80%;
+
+
+
+}
+
+
 
 
 

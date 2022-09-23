@@ -32,3 +32,11 @@ If ends at chute, goes down chute
 
 ## 9/22
 Let's get a snake favicon
+
+Active rendering of position done, now need to focus on dice rolling and candidate behavior
+
+Include note for the beautiful hammers
+Explaining possibly pagerank as well
+
+https://www.overleaf.com/project/632d5e42addbba00fbdd286e
+Initial markov latex doc
