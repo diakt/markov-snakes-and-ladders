@@ -1,38 +1,321 @@
+
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  max-width: 100%;
+  min-width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  flex-direction: column;
+  margin: 0px 0px 0px 0px;
+
+  font-family: sans-serif;
+  background-color: black;
+  /* border: red;
+  border-style: solid; */
+}
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+
+
+header {
+  margin-top: 3vh;
+  min-height: 30px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  /* center to fix*/
+  height: 5vh;
+  border: black;
+  border-style: solid;
+
+
+}
+
+nav {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-direction: row;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+
+nav a {
+  display: flex;
+  flex-wrap: nowrap;
+  text-decoration: none;
+  color: white;
+  margin: 0 2%;
+  padding: 0 auto;
+  font-size: clamp(2em, normal, 2vw);
+  font-size: 1em;
+  flex-shrink: 3;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+nav a:hover {
+  text-decoration: underline;
+}
+
+#directory-item-my-name {
+  font-size: 20px;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
+#directory-item-my-name {
+  color: #996A84;
+}
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+
+  margin-top: 2vh;
+  width: 90%;
+
+  background-color: teal;
+
+
+}
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90vw;
+  height: 100vh;
+  overflow-y: auto;
+  border: red;
+
+
+
+}
+
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
+  width: 90%;
+  height: 60%;
+
+  
+
+
+}
+
+
+.grid-container {
+
+  height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(10, 8vw);
+  grid-template-rows: repeat(10, 5vh);
+}
+.square {
+  background-color: white;
+  color:black;
+
+
+  padding: auto auto;
+  font-size: 110%;
+}
+
+.square-ladder {
+  color: green;
+}
+
+.square-snake {
+  color: red;
+}
+
+
+
+
+/* .square:nth-child(even) {
+  background-color: red;
+  color: #000;
+}
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+
+.dice {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  height: 10vh;
+
+  margin-top: 2vh;
+  font-size: 100%;
+
+  border-style: solid;
+}
+
+.dice-roll-result {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  margin-left: 2vw;
+
+
+  font-size: 100%;
+
+  border-style: solid;
+}
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 40px;
+  position: fixed;
+  bottom: 0;
+  width: 80%;
+  height: 5%;
+  background-color: #996A84;
+  border: black;
+  border-style: solid;
+  border-top-left-radius: 1vh;
+  border-top-right-radius: 1vh;
+}
+
+
+
+
+.footer-directory-icons {
+  width: max(300px, 25%);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0px 0px 0px 0px;
+  margin-right: max(1%, 20px);
+  /* border: red;
+  border-style: solid; */
+
+}
+
+
+.footer-directory-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin: 0 max(1%, 15px);
+  /* border: blue;
+  border-style: solid; */
+  padding: 0px;
+
+}
+
+
+#github-logo {
+  width: 2.6%;
+  min-width: 31px;
+  max-width: 40px;
+}
+
+#linkedin-logo {
+  width: 2.6%;
+  min-width: 31px;
+  max-width: 40px;
+}
+
+#twitter-logo {
+  width: 2.9%;
+  min-width: 35px;
+  max-width: 40px;
+}
+
+#spotify-logo {
+  width: 2.7%;
+  min-width: 35px;
+  padding: 0;
+  margin: 0;
+  /* border: red;
+  border-style: solid; */
+}
+
+
+#scihub-logo {
+  width: 2.7%;
+  min-width: 37px;
+  /* border: red;
+  border-style: solid; */
+}
+
+
+
+@media only screen and (max-width: 734px) {
+  body {
+    max-width: 100%;
+    align-items: center;
+    /* border: 1px red;
+      border-style: solid; */
+
   }
-  to {
-    transform: rotate(360deg);
+
+  header {
+    /* background-color: orange; */
+    /* min-width: 500px; */
+    font-size: smaller;
   }
+
+
+
+  .left-child {
+    display: none;
+
+
+  }
+
+  .right-child {
+    display: none;
+  }
+
+  .mid-child {
+    /*the text item when things get small*/
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .footer-directory-icons {
+    margin-right: min(5%, 30px);
+
+  }
+
 }
