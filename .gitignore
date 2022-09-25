@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#Folder
+MSL_R
+.vscode
+.ipynb_checkpoints
