@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "css-grid": "^1.0.7",
     "react": "^18.2.0",
+    "react-dice-complete": "^1.2.1",
     "react-dom": "^18.2.0",
     "react-latex": "^2.0.0",
     "react-router-dom": "^6.4.0",

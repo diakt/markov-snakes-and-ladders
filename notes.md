@@ -40,3 +40,8 @@ Explaining possibly pagerank as well
 
 https://www.overleaf.com/project/632d5e42addbba00fbdd286e
 Initial markov latex doc
+
+
+## 9/24
+
+https://en.wikipedia.org/wiki/Boustrophedon

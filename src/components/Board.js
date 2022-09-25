@@ -8,6 +8,7 @@ function Board() {
     const [dice, setDice] = useState(0);
     const [userPosition, setUserPosition] = useState(0);
     const [prevUserPosition, setPrevUserPosition] = useState(0);
+    const [moveCounter, setMoveCounter] = useState(0);
 
     //builder constants
     const nums = Array.from({ length: 100 }, (_, i) => 100 - i);
@@ -40,6 +41,18 @@ function Board() {
             setUserPosition(elt.id);
         }
     }
+
+    const resetAfterCompletion = () => {
+        for (let i = 1; i < 101; i++) {
+            let elt = document.getElementById(i);
+            elt.style.backgroundColor = 'white';
+        }
+        setUserPosition(0);
+        setPrevUserPosition(0);
+        setMoveCounter(0);
+        setDice(0);
+    }
+
 
     useEffect(() => {
 
@@ -81,6 +94,7 @@ function Board() {
     useEffect(() => {
         if (userPosition === 100) {
             alert("You Win!");
+            resetAfterCompletion();
         }
     }, [userPosition])
 
@@ -151,7 +165,7 @@ function Board() {
             <span>&nbsp;&nbsp;</span>
 
             <div className='display-player-position'>
-                Current dice is {dice}, current position is {userPosition}
+                Current dice is {dice}, current position is {userPosition}, counter is {moveCounter}
 
             </div>
 
@@ -162,9 +176,21 @@ function Board() {
                 set_PrevUserPosition={setPrevUserPosition}
                 curr_Dice={dice}
                 set_Dice={setDice}
+                move_Counter={moveCounter}
+                set_MoveCounter={setMoveCounter}
             />
 
+        <div className = "reset-game">
+            <button onClick = {() => {
+                resetAfterCompletion();
+            }}>Reset Game</button>
+
+
+
         </div>
+        </div>
+        //matrix for markov chain of snakes and ladders
+
 
     );
 }

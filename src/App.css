@@ -180,12 +180,34 @@ main {
   width: 20vw;
   margin-left: 2vw;
   background-color: white;
-
-
   font-size: 100%;
 
   border-style: solid;
 }
+
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+
+.reset-game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  height: 10vh;
+
+  margin-top: 2vh;
+  font-size: 100%;
+
+  border-style: solid;
+}
+
+
+
+
+
+
 
 /* ---------------------------------------------------------------- */
 /* ---------------------------------------------------------------- */
