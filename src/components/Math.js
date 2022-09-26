@@ -1,11 +1,14 @@
 import React from 'react';
-var Latex = require('react-latex');
+import { MathComponent } from "mathjax-react";
 
 function Math() {
-    {/* <Latex className="latex-in-article">
-                            What is $(3\times 4) \div (5-3)?$
-                        </Latex> */}
-    const fraction = '$$\\frac{1}{2}$$'
+    //     $ \begin{bmatrix}
+    // State & 0 & ... & 3 & 4 & 5 & 6 & 7 & 8 & 9 & ... & 13 & .. & 31 & ... & 100 \\
+    // Chance & 0 & ... & 0 & 0 & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & 0 & ... & \frac{1}{6} & ... & \frac{1}{6} & ... & 0 
+    // \end{bmatrix}  $
+
+
+
     return (
         <div className='Math'>
             <h1>Math of Snakes and Ladders</h1>
@@ -32,7 +35,7 @@ function Math() {
                 </section>
 
                 {/* part 2 */}
-                <section className="article-section">
+                {/* <section className="article-section">
                     <div className='article-section-textleft'>
                         <h2 className="article-section-title">
                             How does the game collide with mathematics?
@@ -48,7 +51,7 @@ function Math() {
                         <img className="right-image" id="pic-board" src="https://i.ebayimg.com/images/g/no4AAOSwSUNiK3zt/s-l1600.jpg" alt="Snakes and Ladders board" />
                     </div>
 
-                </section>
+                </section> */}
 
                 {/* part 3 */}
                 <section className="article-section">
@@ -72,7 +75,7 @@ function Math() {
                 </section>
 
                 {/* part 4 */}
-                <section className="article-section">
+                {/* <section className="article-section">
                     <div className='article-section-textleft'>
                         <h2 className="article-section-title">
                             Markov chains are "forgetful"
@@ -89,7 +92,7 @@ function Math() {
                         <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
                     </div>
 
-                </section>
+                </section> */}
 
 
                 {/* part 5 */}
@@ -98,28 +101,115 @@ function Math() {
                         How does this relate to Snakes and Ladders?
                     </h2>
                     <img className="roll-from-3" src={require("../images/ROLLFROM3.png")} alt="Roll from 3" />
+                    <p className='mathjax-row'>
+                        <MathComponent className='lat-elt' tex={String.raw`P_{3,5} = \frac{1}{6}`} display={true} />
+                        <MathComponent className='lat-elt' tex={String.raw`P_{3,6} = \frac{1}{6}`} display={true} />
+                        <MathComponent className='lat-elt' tex={String.raw`P_{3,7} = \frac{1}{6}`} display={true} />
+                        <MathComponent className='lat-elt' tex={String.raw`P_{3,8} = \frac{1}{6}`} display={true} />
+                        <MathComponent className='lat-elt' tex={String.raw`P_{3,13} = \frac{1}{6}`} display={true} />
+                        <MathComponent className='lat-elt' tex={String.raw`P_{3,31} = \frac{1}{6}`} display={true} />
+                    </p>
+
+
                     <p className="article-section-text-middle">
-                    We used the term states already, which are a big part of Markov chains. It’s a fancy word for “where you are at a point in time.” Your position in snakes and ladders can be considered a state. At state 3 (or any state on the board) you roll a die to see which state you will transition to. You have an equal one in six chance of going to state 13, state 5, state 6, state 7, state 8, or state 32. Why 13 instead of 4 and 32 instead of 9? Go take a look at the board again.                    </p>
+                        We used the term states already, which are a big part of Markov chains. It’s a fancy word for “where you are at a point in time.” Your position in snakes and ladders can be considered a state. At state 3 (or any state on the board) you roll a die to see which state you will transition to. You have an equal one in six chance of going to state 13, state 5, state 6, state 7, state 8, or state 32. Why 13 instead of 4 and 32 instead of 9? Go take a look at the board again.
+                    </p>
+
+
+                </section>
+                {/* part 6 */}
+                <section className="article-section">
+                    <div className='article-section-textleft'>
+                        <h2 className="article-section-title">
+                            Okay, but what's the big picture of this?
+                        </h2>
+                        <p className="article-section-text">
+                            The big-picture gist is that we can figure out how many rolls on average it takes to finish a game because if you get to state 100, we are going to say that you have a 100% chance of remaining at state 100. In Markov chains, this would be described as a “absorbing state.” Think of it as a state that will never let you go. It can also be referred to as recurrent.
+
+                        </p>
+                        <p className="article-section-text">
+                            We are trying to find how many rolls it takes to get to this "absorbing state." It's perfectly reasonable to imagine we could just keep going indefinitely after hitting state 100, but nothing will change, so we can consider the process finished.
+                        </p>
+
+                    </div>
+                    <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://res.cloudinary.com/practicaldev/image/fetch/s--1oDCSTuK--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/uDVRscX.png" alt="Markov Chain" />
+                    </div>
 
                 </section>
 
-                {/* part 6 */}
+
+                {/* part 7 */}
                 <section className="article-section">
                     <div className='article-section-textleft'>
                         <h2 className="article-section-title">
                             A board is one big Markov chain, but how is it represented?
                         </h2>
+                        {/* <p className="article-section-text">
+                            This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
+                        </p> */}
                         <p className="article-section-text">
-                        This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
+                            First, let’s do a smaller example. Take a look at the Markov chain on the right. If we defined state "E" as state 1, and state "A" as state 2, we could represent this markov chain in a matrix as the following:
+                        </p>
+                        {/* Matrix row */}
+                        <MathComponent
+                            className='matrix-row'
+                            tex={String.raw` \left( \begin{array}{cc}
+                            0.3 & 0.7 \\
+                            0.4 & 0.6   \end{array} \right)`}
+                            display={true}
+                        />
+                        <p className="article-section-text">
+                            Think of every state as having its own row, and its chance of changing to another state as the columns of that row. We decided to represent state E as state ”1,” so it has its probabilities represented in row 1. Quick note: Rows go from top to bottom, so state E is the penthouse row.
+
                         </p>
                         <p className="article-section-text">
-                        Let’s say we, again, are at state 41. This would be the 41st row of the matrix. This row would have 101 entries, each representing a state. The chance of going to state 0 from state 41 would be 0 (as there is no way to go to 0 by rolling a die). The same holds for state 41, as there is no way to go to 41 by rolling a die. However, the 42nd entry in the row, representing state 42, would have one-sixth.
+                            In row 1, in column 1, we see E has a 30% chance of staying at itself, and a 70% chance of going to state A. The diagonal elements on the matrix are chances that states stay where they are, which is why we see that State A has a 60% chance of staying at itself at the second column of the second row (ground floor), and a 40% chance of going back to state E.
+
                         </p>
+
 
                     </div>
                     <div className='article-section-imageright'>
                         <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
                     </div>
+
+                </section>
+
+                <section className="article-section-middle">
+                    <div className='article-section-text-middle'>
+                        <h2 className="article-section-title">
+                            And our board?
+                        </h2>
+                        {/* <p className="article-section-text">
+                            This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
+                        </p> */}
+                        <p className="article-section-text">
+                            It’s pretty hard to effectively represent a 101 by 101 matrix. Let’s do a row. Let’s say we, again, are at state 3. This would be the 3rd row of the matrix. This row would have 101 entries, each representing a state. The chance of going to state 3 from state 3 would be 0 (as there is no way to roll a 0). However, as previously mentioned, the points on the row corresponding to the columns representing 5, 6, 7, 8, 13, and 31 would each have a one-sixth chance.
+
+                        </p>
+                        {/* Matrix row */}
+                        <MathComponent
+                            className='matrix-row'
+                            tex={String.raw` \left( \begin{array}{ccccccccccccccccc}
+                            column & 0 & ...& 3 & 4 & 5&6  & 7&8  &9 &...  & &13  &... &31  &... &100  \\
+                            value & 0 & ...& 0 & 0 & \frac{1}{6} & \frac{1}{6}  &  \frac{1}{6}& \frac{1}{6} &0 &...  & &\frac{1}{6}  &... &\frac{1}{6}  &... &0    \end{array} \right)`}
+                            display={true}
+                        />
+                        <p className="article-section-text">
+                            Think of every state as having its own row, and its chance of changing to another state as the columns of that row. We decided to represent state E as state ”1,” so it has its probabilities represented in row 1. Quick note: Rows go from top to bottom, so state E is the penthouse row.
+
+                        </p>
+                        <p className="article-section-text">
+                            In row 1, in column 1, we see E has a 30% chance of staying at itself, and a 70% chance of going to state A. The diagonal elements on the matrix are chances that states stay where they are, which is why we see that State A has a 60% chance of staying at itself at the second column of the second row (ground floor), and a 40% chance of going back to state E.
+
+                        </p>
+
+
+                    </div>
+                    {/* <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
+                    </div> */}
 
                 </section>
 

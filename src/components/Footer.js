@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 function Footer() {
     // const gitHubLogo = document.getElementById("github-logo");

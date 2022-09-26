@@ -1,6 +1,6 @@
 import React from 'react';
 import Board from './Board';
-import Dice from './Dice';
+
 
 function Home() {
     return (

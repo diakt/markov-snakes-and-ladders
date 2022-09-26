@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import ReactDice from 'react-dice-complete';
+import { useState } from 'react';
+// import ReactDice from 'react-dice-complete';
 
 function Dice(props) {
 
