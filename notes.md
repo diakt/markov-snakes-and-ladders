@@ -45,3 +45,7 @@ Initial markov latex doc
 ## 9/24
 
 https://en.wikipedia.org/wiki/Boustrophedon
+
+## 9/25
+
+https://docs.google.com/document/d/1wCFYqZYsnQviMQn6Hgc7IfewWoRf6Sn4QTXMdq6Fxvc/edit
