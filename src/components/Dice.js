@@ -9,18 +9,24 @@ function Dice(props) {
     function rollDice() {
         let currpos = props.curr_UserPosition
         let diceRoll = Math.floor(Math.random() * 6) + 1;
-        setEncapsDice(diceRoll);
-
         let newPosition = Number(currpos) + Number(diceRoll);
         if (newPosition > 100) {
             newPosition = currpos;
         }
+        setTimeout(() => {
+            console.log('timeout in dice')
+            props.set_Dice(diceRoll);
+            props.set_PrevUserPosition(currpos);
+            props.set_UserPosition(newPosition);
+            props.set_MoveCounter(Number(props.move_Counter + 1));
+        }, 300);
 
-        console.log(currpos, diceRoll, newPosition);
-        props.set_Dice(diceRoll);
-        props.set_PrevUserPosition(currpos);
-        props.set_UserPosition(newPosition);
-        props.set_MoveCounter(Number(props.move_Counter + 1));
+
+
+
+
+        // console.log(currpos, diceRoll, newPosition);
+
 
     }
 
@@ -33,9 +39,9 @@ function Dice(props) {
     return (
         <div className='dice'>
             <span>&nbsp;&nbsp;</span>
-            
+
             <button onClick={rollDice}> Roll Dice </button>
-            <p className='dice-roll-result'> {encapsDice} </p>
+            <p className='dice-roll-result'> {props.curr_Dice} </p>
 
 
 

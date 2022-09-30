@@ -21,10 +21,18 @@ function Math() {
                         </h2>
 
                         <p className="article-section-text">
-                            Snakes and ladders (or chutes and ladders)  is a common board game. It requires a board and a die, and is usually played by two people. The board has some variation, but usually looks like this.
+                            Snakes and ladders (or chutes and ladders) is a common board game. 
+                            It requires a board and a die, and is usually played by two people. 
+                            The board has some variation, but usually looks like this.
                         </p>
                         <p className="article-section-text">
-                            Both players start off the board at “zero”. The ultimate goal is to reach 100. The die is rolled, and the player who rolled it adds the value of the die to their position (e.g. if you are at 0 and roll a 3, you go to 3, or if you are at 3 and roll a 5, you go to 8). However, the interest in snakes and ladders comes from the irregular cases where your position after a roll (say you are at 0, roll a 4, and go to 4) sits on either the bottom of a ladder, or the top of a snake. In our case, if you end up at position 4, you then move your piece up to 14, the top of the ladder. If you are unlucky enough to roll a 4 at position 94, you go to 98, but are at the top of a snake/chute, so you fall down to 78. An important thing to note is that if you are at position 97, for example, and roll a 4, which would bring you to “101,” you do not win, but remain at 97, until you either roll a value which brings you to 98 (and hence 78), 99, or 100.
+                            Both players start off the board at “zero”. 
+                            The ultimate goal is to reach 100. 
+                            The die is rolled, and the player who rolled it adds the value of the die to their position (e.g. if you are at 0 and roll a 3, you go to 3, or if you are at 3 and roll a 5, you go to 8). 
+                            However, the interest in snakes and ladders comes from the irregular cases where your position after a roll (say you are at 0, roll a 4, and go to 4) sits on either the bottom of a ladder, or the top of a snake. 
+                            In our case, if you end up at position 4, you then move your piece up to 14, the top of the ladder. 
+                            If you are unlucky enough to roll a 4 at position 94, you go to 98, but are at the top of a snake/chute, so you fall down to 78. 
+                            An important thing to note is that if you are at position 97, for example, and roll a 4, which would bring you to “101,” you do not win, but remain at 97, until you either roll a value which brings you to 98 (and hence 78), 99, or 100.
                         </p>
 
                     </div>
@@ -60,7 +68,12 @@ function Math() {
                             What are Markov Chains?
                         </h2>
                         <p className="article-section-text">
-                            A markov process is (roughly) a system of probabilities that determine your chance of changing your “state” to another “state” at regular intervals. An example of what one of these processes would look like is on the right. Take a look. Every time unit, we are either at “state 0” or “state 1.” If we are at state 0, we have a 50/50 chance of either staying at state 0 or traveling to state 1. If we are at state 1, we have different odds - a 65% chance of going to state 0, or a 35% chance of staying at state 1. Take a second to line up this description with how the graph in the middle looks.
+                            A markov process is (roughly) a system of probabilities that determine your chance of changing your “state” to another “state” at regular intervals. 
+                            An example of what one of these processes would look like is on the right. 
+                            Take a look. Every time unit, we are either at “state 0” or “state 1.” 
+                            If we are at state 0, we have a 50/50 chance of either staying at state 0 or traveling to state 1. 
+                            If we are at state 1, we have different odds - a 65% chance of going to state 0, or a 35% chance of staying at state 1. 
+                            Take a second to line up this description with how the graph in the middle looks.
 
                         </p>
                         <p className="article-section-text">
@@ -112,7 +125,12 @@ function Math() {
 
 
                     <p className="article-section-text-middle">
-                        We used the term states already, which are a big part of Markov chains. It’s a fancy word for “where you are at a point in time.” Your position in snakes and ladders can be considered a state. At state 3 (or any state on the board) you roll a die to see which state you will transition to. You have an equal one in six chance of going to state 13, state 5, state 6, state 7, state 8, or state 32. Why 13 instead of 4 and 32 instead of 9? Go take a look at the board again.
+                        We used the term states already, which are a big part of Markov chains. 
+                        It’s a fancy word for “where you are at a point in time.” 
+                        Your position in snakes and ladders can be considered a state. 
+                        At state 3 (or any state on the board) you roll a die to see which state you will transition to. 
+                        You have an equal one in six chance of going to state 13, state 5, state 6, state 7, state 8, or state 32. 
+                        Why 13 instead of 4 and 32 instead of 9? Go take a look at the board again.
                     </p>
 
 
@@ -124,11 +142,15 @@ function Math() {
                             Okay, but what's the big picture of this?
                         </h2>
                         <p className="article-section-text">
-                            The big-picture gist is that we can figure out how many rolls on average it takes to finish a game because if you get to state 100, we are going to say that you have a 100% chance of remaining at state 100. In Markov chains, this would be described as a “absorbing state.” Think of it as a state that will never let you go. It can also be referred to as recurrent.
+                            The big-picture gist is that we can figure out how many rolls on average it takes to finish a game because if you get to state 100, we are going to say that you have a 100% chance of remaining at state 100. 
+                            In Markov chains, this would be described as a “absorbing state.” 
+                            Think of it as a state that's never going to give you up, never going to let you down, never going to run around and desert you.
+                            It can also be referred to as recurrent.
 
                         </p>
                         <p className="article-section-text">
-                            We are trying to find how many rolls it takes to get to this "absorbing state." It's perfectly reasonable to imagine we could just keep going indefinitely after hitting state 100, but nothing will change, so we can consider the process finished.
+                            We are trying to find how many rolls on average it takes to get to this "absorbing state." 
+                            It's perfectly reasonable to imagine we could just keep going indefinitely after hitting state 100, but nothing will change, so we can consider the process finished.
                         </p>
 
                     </div>
@@ -149,7 +171,10 @@ function Math() {
                             This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
                         </p> */}
                         <p className="article-section-text">
-                            First, let’s do a smaller example. Take a look at the Markov chain on the right. If we defined state "E" as state 1, and state "A" as state 2, we could represent this markov chain in a matrix as the following:
+                            First, let’s do a smaller example. 
+                            As a quick precursor note, there are no absorbing states in this markov chain. 
+                            Take a look at the Markov chain on the right. 
+                            If we defined state "E" as state 1, and state "A" as state 2, we could represent this markov chain in a matrix as the following:
                         </p>
                         {/* Matrix row */}
                         <MathComponent
@@ -160,11 +185,14 @@ function Math() {
                             display={true}
                         />
                         <p className="article-section-text">
-                            Think of every state as having its own row, and its chance of changing to another state as the columns of that row. We decided to represent state E as state ”1,” so it has its probabilities represented in row 1. Quick note: Rows go from top to bottom, so state E is the penthouse row.
+                            Think of every state as having its own row, and its chance of changing to another state as the columns of that row. 
+                            We decided to represent state E as state ”1,” so it has its probabilities represented in row 1. 
+                            Quick note: Rows go from top to bottom, so state E is the penthouse row.
 
                         </p>
                         <p className="article-section-text">
-                            In row 1, in column 1, we see E has a 30% chance of staying at itself, and a 70% chance of going to state A. The diagonal elements on the matrix are chances that states stay where they are, which is why we see that State A has a 60% chance of staying at itself at the second column of the second row (ground floor), and a 40% chance of going back to state E.
+                            In row 1, in column 1, we see E has a 30% chance of staying at itself, and a 70% chance of going to state A.
+                            The diagonal elements on the matrix are chances that states stay where they are, which is why we see that State A has a 60% chance of staying at itself at the second column of the second row (ground floor), and a 40% chance of going back to state E.
 
                         </p>
 
@@ -179,13 +207,19 @@ function Math() {
                 <section className="article-section-middle">
                     <div className='article-section-text-middle'>
                         <h2 className="article-section-title">
-                            And our board?
+                            What does the matrix for our board look like?
                         </h2>
                         {/* <p className="article-section-text">
                             This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
                         </p> */}
                         <p className="article-section-text">
-                            It’s pretty hard to effectively represent a 101 by 101 matrix. Let’s do a row. Let’s say we, again, are at state 3. This would be the 3rd row of the matrix. This row would have 101 entries, each representing a state. The chance of going to state 3 from state 3 would be 0 (as there is no way to roll a 0). However, as previously mentioned, the points on the row corresponding to the columns representing 5, 6, 7, 8, 13, and 31 would each have a one-sixth chance.
+                            It’s pretty hard to effectively display a 101 by 101 matrix. 
+                            Let’s do a row. 
+                            Let’s say we, again, are at state 3. 
+                            This would be the 3rd row of the matrix. 
+                            This row would have 101 entries, each representing a state. 
+                            The chance of going to state 3 from state 3 would be 0 (as there is no way to roll a 0). 
+                            However, as previously mentioned, the points on the row corresponding to the columns representing 5, 6, 7, 8, 13, and 31 would each have a one-sixth chance.
 
                         </p>
                         {/* Matrix row */}
@@ -193,17 +227,54 @@ function Math() {
                             className='matrix-row'
                             tex={String.raw` \left( \begin{array}{ccccccccccccccccc}
                             column & 0 & ...& 3 & 4 & 5&6  & 7&8  &9 &...  & &13  &... &31  &... &100  \\
-                            value & 0 & ...& 0 & 0 & \frac{1}{6} & \frac{1}{6}  &  \frac{1}{6}& \frac{1}{6} &0 &...  & &\frac{1}{6}  &... &\frac{1}{6}  &... &0    \end{array} \right)`}
+                            probability & 0 & ...& 0 & 0 & \frac{1}{6} & \frac{1}{6}  &  \frac{1}{6}& \frac{1}{6} &0 &...  & &\frac{1}{6}  &... &\frac{1}{6}  &... &0    \end{array} \right)`}
                             display={true}
                         />
                         <p className="article-section-text">
-                            Think of every state as having its own row, and its chance of changing to another state as the columns of that row. We decided to represent state E as state ”1,” so it has its probabilities represented in row 1. Quick note: Rows go from top to bottom, so state E is the penthouse row.
+                            If we were at state 3, we would have a 1/6 chance of going to state 5, a 1/6 chance of going to state 6, and so on. 
+                            The only exception is that we would have no chance of going to state 3, as we are already there. 
+                            This is why the diagonal elements are 0. We are not going to go to the state we are already in.
 
                         </p>
+                        
+
+
+                    </div>
+                    {/* <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
+                    </div> */}
+
+                </section>
+                <section className="article-section-middle">
+                    <div className='article-section-text-middle'>
+                        <h2 className="article-section-title">
+                            Are any of our rows different? What's the absorbing state?
+                        </h2>
+                        {/* <p className="article-section-text">
+                            This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
+                        </p> */}
                         <p className="article-section-text">
-                            In row 1, in column 1, we see E has a 30% chance of staying at itself, and a 70% chance of going to state A. The diagonal elements on the matrix are chances that states stay where they are, which is why we see that State A has a 60% chance of staying at itself at the second column of the second row (ground floor), and a 40% chance of going back to state E.
+                            Good questions. As we previously discussed, the game ends when the player reaches 100. 
+                            However, how would we represent our "terminating state?" 
+                            We can just make the last row of the matrix all 0s, except for the last column, which would be 1. 
+                            This would represent the fact that the game is over, and the player has won.
+                        </p>
+                        {/* Matrix row */}
+                        <MathComponent
+                            className='matrix-row'
+                            tex={String.raw` \left( \begin{array}{cccc}
+                            column & 0 & ...& 94 & 95& 96 & 97& 98 & 99 &100  \\
+                            probability & 0 & ...& 0 & 0& 0 & 0& 0 & 0 & 1   \end{array} \right)`}
+                            display={true}
+                        />
+                        <p className="article-section-text">
+                            If we were at state 3, we would have a 1/6 chance of going to state 5, a 1/6 chance of going to state 6, and so on. 
+                            The only exception is that we would have no chance of going to state 3, as we are already there. 
+                            This is why the diagonal elements are 0. 
+                            We are not going to go to the state we are already in.
 
                         </p>
+                        
 
 
                     </div>

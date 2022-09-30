@@ -12,6 +12,19 @@ function Board() {
 
     //builder constants
     const nums = Array.from({ length: 100 }, (_, i) => 100 - i);
+    let reverse = (arr, start, end) => {
+        while (start < end) {
+          let t = arr[start];
+          arr[start++] = arr[end];
+          arr[end--] = t;
+        }
+      };
+    for (let i = 0; i < 5; i++) {
+            reverse(nums, 20*i, 20*i+9);
+    }
+
+
+    //want an array where it goes 1-10, 20-11, 21-30, etc.
     const laddermap = new Map([[1, 38], [4, 14], [9, 31], [21, 42], [28, 84], [51, 67], [71, 91], [80, 100]])
     const snakemap = new Map([[16, 6], [47, 26], [49, 11], [56, 53], [62, 19], [64, 60], [87, 24], [93, 73], [95, 75], [98, 78]])
     const boardendmap = new Map
@@ -92,7 +105,8 @@ function Board() {
     }, [userPosition])
 
     useEffect(() => {
-        if (userPosition === 100) {
+        console.log('current userPosition is ', userPosition)
+        if (userPosition == 100) {
             alert("You Win!");
             resetAfterCompletion();
         }
@@ -115,6 +129,7 @@ function Board() {
                                 onClick={(event) => {
                                     console.log("id", event.target.id, "ladder")
                                     positionDisplay(event.target)
+                                    setUserPosition(event.target.id)
                                 }}
                             >
                                 {(num).toString()}{"  (" + elt + ")"}

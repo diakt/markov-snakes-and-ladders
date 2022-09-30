@@ -230,16 +230,16 @@ main {
   align-items: center;
   
   width: 90%;
-  border: red;
-  border-style: solid;
+  /* border: red;
+  border-style: solid; */
 
 }
 
 .article-section {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
+  /* justify-content: flex-start; */
+  align-items: center;
   background-color: white;
   width: 99%;
 
@@ -272,8 +272,8 @@ main {
   width: 90%;
   font-size: 120%;
   margin-bottom: 2vh;
-  border: 2px black;
-  border-style: solid;
+  /* border: 2px black;
+  border-style: solid; */
 
 }
 
@@ -291,8 +291,8 @@ main {
   width: 70%;
   height: 95%;
   margin-bottom: 2vh;
-  border: blue;
-  border-style: solid;
+  /* border: blue;
+  border-style: solid; */
 
 
 }
@@ -337,24 +337,23 @@ main {
 .article-section-imageright {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   background-color: white;
   width: 30%;
-
-  margin-bottom: 2vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
   border: black;
   border-style: solid;
 
 }
 
 .right-image {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
   align-items: center;
   background-color: white;
-  width: 100%;
+  width: 90%;
+  border: red;
+  border-style: dashed;
 
 }
 
