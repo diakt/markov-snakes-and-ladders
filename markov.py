@@ -91,20 +91,20 @@ class MarkovSim(object):
 #     print(vec1)
 #     print('')
 # print(vec1)
-bigmat = [[0 for _ in range(101)] for y in range(101)]
-bigmat[100][100] = 1
+# bigmat = [[0 for _ in range(101)] for y in range(101)]
+# bigmat[100][100] = 1
 
-print(len(bigmat), len(bigmat[0]))
+# print(len(bigmat), len(bigmat[0]))
 
 
-for i in range(101):
-    for j in range(i+1, i+7):
-        if j > 100:
-            pass
-        else:
-            bigmat[i][j] = float(1/6)
+# for i in range(101):
+#     for j in range(i+1, i+7):
+#         if j > 100:
+#             pass
+#         else:
+#             bigmat[i][j] = float(1/6)
 
-print(bigmat[0][0:10], bigmat[100][91:101])
+# print(bigmat[0][0:10], bigmat[100][91:101])
 
 
 class Markov(object):
@@ -114,7 +114,7 @@ class Markov(object):
         self.snakemap = [[16, 6], [47, 26], [49, 11], [56, 53], [
             62, 19], [64, 60], [87, 24], [93, 73], [95, 75], [98, 78]]
 
-        self.markov_map = {i: i+1 for i in range(101)}
+        self.markov_map = {}
         for i in range(0, 101):
             self.markov_map[i] = i
         for key, val in self.laddermap:
@@ -126,16 +126,52 @@ class Markov(object):
 
         self.bigmat = [[0 for _ in range(101)] for y in range(101)]
         self.bigmat[100][100] = 1
-        for i in range(101):
+        for i in range(100):
             for j in range(i+1, i+7):
-                if j > 100:
-                    pass
+                if j >100:
+                    #previously pass
+                    self.bigmat[i][i] += float(1/6)
                 else:
-                    bigmat[i][j] = float(1/6)
+                    # if j in self.markov_map:
+                    #     self.bigmat[i][self.markov_map[j]] = float(1/6)
+                    # else:
+                        #self.bigmat[i][j] = float(1/6)
+                    self.bigmat[self.markov_map[j]][i] = float(1/6)
+                
         
-        for elt in self.laddermap:
-            pass
+        
+        
+        
+        
+
+import pandas as pd
+dango = Markov()
+
+a = pd.DataFrame(dango.bigmat, columns=[i for i in range(101)], index=[i for i in range(101)])
+a.to_csv('markov.csv',index=True, header=True, sep=',')
 
 
-        # for key, val in self.markov_map.items():
-        #     print(key, val)
+
+res = []
+
+
+
+vec = [0 for _ in range(101)]
+vec[0]=10000
+temp = vec
+t=0
+while temp[-1] <= 5000:
+    res.append(temp)
+    temp = np.dot(dango.bigmat, temp)
+    t+=1
+    print(t)
+    print('')
+
+print(sum(temp), "should be 1000")
+#523.9700728745092 should be 1000
+b = pd.DataFrame(res, columns=[i for i in range(101)], index=[i for i in range(t)])
+b.to_csv('markov2.csv',index=True, header=True, sep=',')
+
+
+#the issue is that the late states are not covering a full range w/prob one
+

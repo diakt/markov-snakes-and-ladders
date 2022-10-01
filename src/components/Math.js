@@ -123,12 +123,12 @@ function Math() {
                             Quick concept: States in Markov chains
                         </h2>
                         <p className="article-section-text">
-                        We used the term states already, which are a big part of Markov chains.
-                        It’s a fancy word for “where you are at a point in time.”
-                        Your position in snakes and ladders can be considered a state.
-                        At state 3 (or any state on the board) you roll a die to see which state you will transition to.
-                        You have an equal one in six chance of going to state 13, state 5, state 6, state 7, state 8, or state 32.
-                        Why 13 instead of 4 and 32 instead of 9? Go take a look at the board again.
+                            We used the term states already, which are a big part of Markov chains.
+                            It’s a fancy word for “where you are at a point in time.”
+                            Your position in snakes and ladders can be considered a state.
+                            At state 3 (or any state on the board) you roll a die to see which state you will transition to.
+                            You have an equal one in six chance of going to state 13, state 5, state 6, state 7, state 8, or state 32.
+                            Why 13 instead of 4 and 32 instead of 9? Go take a look at the board again.
                         </p>
                         
                         
@@ -319,6 +319,92 @@ function Math() {
 
 
 
+                <section className="article-section-middle">
+                    <div className='article-section-text-middle'>
+                        <h2 className="article-section-title">
+                            How do we now calculate the average number of rolls to complete the game?
+                        </h2>
+                        {/* <p className="article-section-text">
+                            This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
+                        </p> */}
+                        <p className="article-section-text">
+                            There are generally two ways to approach a simple probability problem like this.
+                            The first is simulation, in which we simulate the game many times and calculate the average number of rolls. 
+                            We can make something that plays the game five million times and we can examine that data.
+                            While this is *cough* effective, and pretty straightforward, in terms of total understanding, it's still not quite exact in a pedantic sense.
+                        </p>
+                        <p className="article-section-text">
+                            The second approach is using our newfound understanding of Markov Chains, in combination with some linear algebra on our newly created snakes and ladders matrix.
+                            It will give us an exact answer, which is pretty cool.
+                            Not only is exactness cool, but we can check our answer against the answer the simulation gives us, which is a good way to make sure I haven't led you on an elaborate ruse for some abstrusely justified sense of personal gratification.
+                            {/* Note deterministic, probabilistic differentiation */}
+                        </p>
+                        
+
+
+
+
+                    </div>
+                    {/* <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
+                    </div> */}
+
+                </section>
+                <section className="article-section">
+                    <div className='article-section-textleft'>
+                        <h2 className="article-section-title">
+                            How do we use our Markov Chain Matrix?
+                        </h2>
+
+                        <p className="article-section-text">
+                        If a matrix is a rectangle, a vector is a skyscraper. It has a width of one, and our vector would have a "height" of 101.
+                        If we were to multiply our matrix by a vector we created with a 1 (any number really) in the top row and 0s everywhere else, we would get back a vector with the same dimensions, but with the value of one sixth at all six of the possible positions in the vector we could go from 0 (i.e. state 38 (1 is a ladder), 2, 3, 14 (4 is a ladder), 5, and 6 ).
+                        </p>
+                        
+
+                        
+                  
+
+                    </div>
+                    <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Matrix_vector_multiplication.svg/2560px-Matrix_vector_multiplication.svg.png" alt="Snakes and Ladders board" />
+                    </div>
+
+                </section>
+
+
+
+
+
+                <section className="article-section-middle">
+                    <div className='article-section-text-middle'>
+                        <h2 className="article-section-title">
+                            How do we use our Markov Chain Matrix?
+                        </h2>
+                        {/* <p className="article-section-text">
+                            This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
+                        </p> */}
+                        
+                        
+
+                        <p className="article-section-text">
+                        If a matrix is a rectangle, a vector is a skyscraper. It has a width of one, and our vector would have a "height" of 101.
+                        If we were to multiply our matrix by a vector we created with a 1 (any number really) in the top row and 0s everywhere else, we would get back a vector with the same dimensions, but with the value of one sixth at all six of the possible positions in the vector we could go from 0 (i.e. state 38 (1 is a ladder), 2, 3, 14 (4 is a ladder), 5, and 6 ).
+                        </p>
+                        
+                        <p className="article-section-text">
+                            
+
+                        </p>
+
+
+
+                    </div>
+                    {/* <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
+                    </div> */}
+
+                </section>
                 <section className="article-section-middle">
                     <div className='article-section-text-middle'>
                         <h2 className="article-section-title">

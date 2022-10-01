@@ -339,6 +339,7 @@ main {
 
 .article-section-imageright {
   display: flex;
+
   flex-direction: row;
   justify-content: center;
   align-items: center;
