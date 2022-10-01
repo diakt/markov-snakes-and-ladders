@@ -20,7 +20,7 @@ function Board() {
         }
       };
     for (let i = 0; i < 5; i++) {
-            reverse(nums, 20*i, 20*i+9);
+            reverse(nums, 20*i+10, 20*i+19);
     }
 
 

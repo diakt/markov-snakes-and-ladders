@@ -132,6 +132,10 @@ class Markov(object):
                     pass
                 else:
                     bigmat[i][j] = float(1/6)
+        
+        for elt in self.laddermap:
+            pass
+
 
         # for key, val in self.markov_map.items():
         #     print(key, val)

@@ -9,6 +9,7 @@
 
   font-family: sans-serif;
   background-color: black;
+  
   /* border: red;
   border-style: solid; */
 }
@@ -80,6 +81,7 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  padding-bottom: 100vh;
 
 
   margin-top: 2vh;
@@ -97,7 +99,7 @@ main {
   align-items: center;
   width: 90vw;
   height: 100vh;
-  overflow-y: auto;
+
   border: red;
 
 
@@ -217,8 +219,9 @@ main {
   justify-content: flex-start;
   align-items: center;
   width: 90vw;
-  height: 100vh;
-  overflow-y: auto;
+  height: 100%;
+
+  
 
 
 }
@@ -270,7 +273,7 @@ main {
   align-items: center;
   background-color: white;
   width: 90%;
-  font-size: 120%;
+
   margin-bottom: 2vh;
   /* border: 2px black;
   border-style: solid; */
@@ -343,8 +346,8 @@ main {
   width: 30%;
   margin-top: 1vh;
   margin-bottom: 1vh;
-  border: black;
-  border-style: solid;
+  /* border: black; */
+  /* border-style: solid; */
 
 }
 
@@ -352,8 +355,8 @@ main {
   align-items: center;
   background-color: white;
   width: 90%;
-  border: red;
-  border-style: dashed;
+  /* border: red; */
+  /* border-style: dashed; */
 
 }
 
