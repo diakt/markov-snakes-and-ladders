@@ -127,16 +127,15 @@ class Markov(object):
         self.bigmat = [[0 for _ in range(101)] for y in range(101)]
         self.bigmat[100][100] = 1
         for i in range(100):
-            for j in range(i+1, i+7):
-                if j >100:
-                    #previously pass
-                    self.bigmat[i][i] += float(1/6)
-                else:
-                    # if j in self.markov_map:
-                    #     self.bigmat[i][self.markov_map[j]] = float(1/6)
-                    # else:
-                        #self.bigmat[i][j] = float(1/6)
-                    self.bigmat[self.markov_map[j]][i] = float(1/6)
+            if self.markov_map[i]==i:
+                for j in range(i+1, i+7):
+                    if j >100:
+                        if i!= 95 and i!=98:
+                            self.bigmat[self.markov_map[i]][i] += float(1/6)
+                    else:
+                        self.bigmat[self.markov_map[j]][i] +=float(1/6)
+        
+
                 
         
         
@@ -152,26 +151,101 @@ a.to_csv('markov.csv',index=True, header=True, sep=',')
 
 
 
+
+
+#Nonsimulative approach begins
+
+
+class MarkovQ(object):
+    def __init__(self):
+        self.laddermap = [[1, 38], [4, 14], [9, 31], [
+            21, 42], [28, 84], [36,44], [51, 67], [71, 91], [80, 100]] #forgot 36
+        self.snakemap = [[16, 6], [47, 26], [49, 11], [56, 53], [
+            62, 19], [64, 60], [87, 24], [93, 73], [95, 75], [98, 78]]
+        print('length of funnies is ', len(self.laddermap)+len(self.snakemap))
+        self.markov_map = {}
+        for i in range(0, 100):
+            self.markov_map[i] = i
+        for key, val in self.laddermap:
+            self.markov_map[key] = val
+        for key, val in self.snakemap:
+            self.markov_map[key] = val
+
+        self.markov_map[100] = 100
+
+        self.bigmat = [[0 for _ in range(101)] for y in range(101)]
+        self.bigmat[100][100] = 1
+        for i in range(100):
+            if self.markov_map[i]==i:
+                for j in range(i+1, i+7):
+                    if j >100:
+                        if i!= 95 and i!=98:
+                            self.bigmat[self.markov_map[i]][i] += float(1/6)
+                    else:
+                        self.bigmat[self.markov_map[j]][i] +=float(1/6)
+
+
+dongo = MarkovQ()
+
+a = np.array(dongo.bigmat)
+print(len(a), len(a[0]))
+
+
+
+
+#cutting out 0rows, 0cols
+#print(dango.markov_map)
+rows = np.argwhere(np.all(a[...,:] == 0, axis=0))
+print('rows to be deleted are', rows)
+b = np.delete(a, rows, axis=1)
+print(len(b), len(b[0]))
+
+cols = np.argwhere(np.all(b[...,:] == 0, axis=1))
+cols = cols[1:] #not sure why it triggered on 0 col but eh
+print('cols to be deleted are', cols)
+c = np.delete(b, cols, axis=0)
+
+print(len(c), len(c[0]))
+
+
+
+newframe = pd.DataFrame(c, columns=[y for y in range(101) if y not in cols], index=[x for x in range(101) if x not in rows])
+newframe.to_csv('newframe.csv',index=True, header=True, sep=',')
+
+
+
 res = []
+chopped = []
+for row in c:
+    chopped.append(row[:-1])
+chopped.pop()
+print(len(chopped), len(chopped[0]))
+
+chopped_p = pd.DataFrame(chopped, columns=[y for y in range(len(chopped))], index=[x for x in range(len(chopped))])
+newframe.to_csv('chopped_p.csv',index=True, header=True, sep=',')
+
+#creating fundamental matrix for expected number of rolls
+fundamental = np.identity(len(c))
+# print(fundamental[0:10][0:10])
+
+final = np.linalg.inv(np.identity(81)-chopped)
+print(final)
+print(sum(final[-1])) 
+print(sum(x[0] for x in final)) #Let's fucking goooooooooooooooooooooo
+#if singular, has a row of zeroes, so need to remove all deadrows
 
 
 
-vec = [0 for _ in range(101)]
-vec[0]=10000
-temp = vec
-t=0
-while temp[-1] <= 5000:
-    res.append(temp)
-    temp = np.dot(dango.bigmat, temp)
-    t+=1
-    print(t)
-    print('')
-
-print(sum(temp), "should be 1000")
-#523.9700728745092 should be 1000
-b = pd.DataFrame(res, columns=[i for i in range(101)], index=[i for i in range(t)])
-b.to_csv('markov2.csv',index=True, header=True, sep=',')
 
 
-#the issue is that the late states are not covering a full range w/prob one
+
+
+
+
+
+
+
+
+
+
 
