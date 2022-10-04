@@ -9,6 +9,73 @@ function Math() {
     // State & 0 & ... & 3 & 4 & 5 & 6 & 7 & 8 & 9 & ... & 13 & .. & 31 & ... & 100 \\
     // Chance & 0 & ... & 0 & 0 & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & 0 & ... & \frac{1}{6} & ... & \frac{1}{6} & ... & 0 
     // \end{bmatrix}  $
+
+    const Mark = () => {
+        const markovString = `
+        import numpy as np
+        import pandas as pd
+
+        class MarkovNS(object):
+            def __init__(self):
+                self.odds = [[1, 38], [4, 14], [9, 31], [
+                    21, 42], [28, 84], [36,44], [51, 67], [71, 91], [80, 100], [16, 6], [47, 26], [49, 11], [56, 53], [62, 19], [64, 60], [87, 24], [93, 73], [95, 75], [98, 78]]
+
+                self.odd_map = {}
+                for a, b in self.odds:
+                    self.odd_map[a] = b
+
+                self.d = {}
+                for i in range(0, 101):
+                    if i in self.odd_map:
+                        pass
+                    else:
+                        self.d[i] = i
+
+                self.matrix = [[0 for _ in range(82)] for y in range(82)]
+                self.order = sorted(self.d.keys())
+
+
+                i=0
+                for key, value in self.d.items():
+                    for j in range(key+1, key+7):
+                        if j in self.odd_map:
+                            self.matrix[i][self.order.index(self.odd_map[j])] += float(1/6)
+                        elif j > 100:
+                            self.matrix[i][self.order.index(key)] += float(1/6)
+                        else:
+                            self.matrix[i][self.order.index(j)] += float(1/6)
+                    i+=1
+
+
+        Markov = MarkovNS()
+        outlay = pd.DataFrame(Markov.matrix, columns=[i for i in range(len(Markov.matrix))], index=[j for j in range(len(Markov.matrix))])
+        outlay.to_csv('outlay.csv',index=True, header=True, sep=',')
+
+        chopped = [x[:-1] for x in Markov.matrix]
+        chopped.pop()
+        final = np.linalg.inv(np.identity(81)-chopped)
+
+        res = sum(final[0])
+        print(res)
+        `;
+        return (
+            <div>
+                <SyntaxHighlighter language="python" style={docco} className='dingo'>
+                    {markovString}
+                </SyntaxHighlighter>
+
+
+            </div>//
+
+        )
+    }
+
+
+
+
+
+
+
     const Sim = () => {
         const codeString = `
         import random
@@ -57,13 +124,14 @@ function Math() {
             <SyntaxHighlighter language="python" style={docco} className='dingo'>
                 {codeString}
             </SyntaxHighlighter>
+
         );
     };
 
 
     return (
         <div className='Math'>
-            
+
             <h1>Math of Snakes and Ladders</h1>
             <article className='math-article'>
                 {/* part 1 */}
@@ -158,6 +226,15 @@ function Math() {
 
                 </section>
                 {/* part 6 */}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -356,6 +433,24 @@ function Math() {
                     </div> */}
 
                 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 {/* ------------------------------------------------------------------------ */}
@@ -558,13 +653,11 @@ function Math() {
                         {/* <p className="article-section-text">
                             This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
                         </p> */}
-                        <p className="article-section-text">
-                            I'm so glad you asked.
-                        </p>
-                        <p className="article-section-text">
-                            There is a very elegant way to do this, using our concepts.
 
-                            If we have our Markov matrix, which we can call M, first we can remove all the rows and columns for the points we don't touch.
+                        <p className="article-section-text">
+                            There is, in fact, a very elegant way to do this, using our concepts.
+
+                            If we have our Markov matrix, we can remove all the rows and columns for the points we don't touch.
                             These rows and columns correspond to the bottom of ladders (e.g. 1) or the tops of slides (e.g. 16).
                             There are 19 snakes or ladders in the board, and removing them would yield an 82x82 matrix (from a 101x101 matrix).
                             We also chop off the row/column corresponding to the corresponding state, so we remove the row/column corresponding to position 100, yielding an 81x81 matrix.
@@ -573,7 +666,10 @@ function Math() {
                             We create an identity matrix with the same dimensions as the matrix we just created.
                             We then subtract our matrix from this identity matrix.
                             The result is an invertible matrix, and we will invert it.
-                            If we add the first element of every row from this matrix together, we will be able to see that the expected number of rolls to complete a game of snakes and ladders on your own is ~39.223.
+                            If we add the first element of every row from this matrix together, we should be able to see the expected number of rolls to complete a game of snakes and ladders on your own.
+                        </p>
+                        <p className="article-section-text">
+                            We will do the legwork with a computer. I'll attach it below.
                         </p>
 
                     </div>
@@ -582,6 +678,36 @@ function Math() {
                     </div>
 
                 </section>
+
+                <Mark />
+
+                <SyntaxHighlighter language="python" style={docco} className='dingo'>
+                    {'39.2251223082349'}
+                </SyntaxHighlighter>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 {/* ------------------------------------------------------------------------ */}
@@ -596,9 +722,7 @@ function Math() {
                         <h2 className="article-section-title">
                             How do we check the validity of this answer?
                         </h2>
-                        {/* <p className="article-section-text">
-                            This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
-                        </p> */}
+
                         <p className="article-section-text">
                             Like we said before, we can now use simulation to check if our answer is correct.
                             We can create a process that mimicks randomness in order to play snakes and ladders and track the data.
@@ -621,17 +745,79 @@ function Math() {
                 </section>
 
                 <Sim />
-                
+
 
                 <img className="sim-img" src={require("../images/100.png")} alt="100 rolls, with an average of... let me check" />
                 <img className="sim-img" src={require("../images/100000.png")} alt="100000 rolls, with an average of... let me check" />
                 <img className="sim-img" src={require("../images/5000000.png")} alt="5000000 rolls, with an average of... let me check" />
-                
+
+
+                <section className="article-section-middle">
+                    <div className='article-section-text-middle'>
+
+                        <p className="article-section-text">
+                            Above are three simulations of one hundred, one hundred thousand, and five million games of snakes and ladders.
+                            Past saying anything that would make my probability theory professor dig me a shallow grave, we can see that our simulated average number of rolls to absorption converges to our theoretical average number of rolls to absorption.
 
 
 
 
+                        </p>
 
+                        <p className="article-section-text">
+                            There's a faint, sparkling chance that we might have been close to right.
+
+                        </p>
+
+
+                    </div>
+                    {/* <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
+                    </div> */}
+
+                </section>
+
+                <h2>Part 4: Conclusion </h2>
+
+                <section className="article-section-middle">
+                    <div className='article-section-text-middle'>
+                        <h2 className="article-section-title">
+                            So what did we figure out?
+                        </h2>
+                        <p className="article-section-text">
+                            Comparing two separate methods, namely Markov chains and simulation, we were able to figure out the average number of rolls to complete a game of snakes and ladders was ~39.2, if you play alone, like a dweeb.
+
+
+                        </p>
+                        <h2 className="article-section-title">
+                            How were these methods even different?
+                        </h2>
+                        <p className="article-section-text">
+                            A very good question.
+
+                        </p>
+                        <p className="article-section-text">
+                            
+
+                        </p>
+                        <h2 className="article-section-title">
+                            So what did we figure out?
+                        </h2>
+                        <p className="article-section-text">
+                            Comparing two separate methods, namely Markov chains and simulation, we were able to figure out the average number of rolls to complete a game of snakes and ladders was ~39.2, if you play alone, like a dweeb.
+
+
+                        </p>
+
+                        
+
+
+                    </div>
+                    {/* <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
+                    </div> */}
+
+                </section>
 
 
 
