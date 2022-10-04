@@ -161,11 +161,7 @@ function Math() {
                             However, I also wondered how much time it would take to win a game on average.
                             As the game itself is entirely determined by chance, there was.
                         </p>
-                        <p className="article-section-text">
-                            I was recently doing coursework in probability, and it was offhandedly mentioned as one of several examples of Markov chain processes.
-                            It was a pretty immediate jump that I had to dunk on a younger version of myself and figure out the math.
-
-                        </p>
+                        
 
 
                     </div>
@@ -314,7 +310,7 @@ function Math() {
 
                 </section>
 
-
+                                 {/* time homogeneity, past invariant */}
                 <section className="article-section">
                     <div className='article-section-textleft'>
                         <h2 className="article-section-title">
@@ -507,13 +503,9 @@ function Math() {
                         </p>
 
 
-
-
-
                         <p className="article-section-text">
-                            If a matrix is a rectangle, a vector is a skyscraper. It has a width of one, and can have any height.
-                            If we want to multiply a matrix with other matrix, or a matrix with a vector, the width of the matrix on the left needs to be the same as the height of the matrix/vector on the right.
-                            If we multiple an nxn matrix with an nxn matrix/nx1 vector, we will get a result with the height of the left matrix and the width of the right matrix/vector.
+                            If we want to multiply a matrix with other matrix, or a matrix with a vector (a matrix with either width or height or both of 1), the width of the matrix on the left needs to be the same as the height of the matrix/vector on the right.
+                            If we multiple an mxn matrix with an nxn matrix/nx1 vector, we will get a result with the height of the left matrix and the width of the right matrix/vector.
                         </p>
 
                         <p className="article-section-text">
@@ -793,18 +785,30 @@ function Math() {
                             How were these methods even different?
                         </h2>
                         <p className="article-section-text">
-                            A very good question.
+                            A very good question.  
+                            Our Markov chains approach involved no randomness, and was purely "deterministic," which is a fancy way of saying that we will always get the same result from the same starting point.
+                            We didn't simulate rolling a dice.
+                            Instead, we thought of the transitions between states as almost splits in a river, diverting the flow of water to different places, and kept an eye on how much water went into our absorbing state every roll.
 
                         </p>
                         <p className="article-section-text">
-                            
+                            On the other hand, our simulation approach involved randomness, and was purely "stochastic," which is a fancy way of saying that we will get different results from the same starting point.
+                            We saw above that our average number of rolls to absorption was volatile around 39.2, dipping up or down by a few rolls.
+                            In the Markov chain approach, on the other hand, we get the same result, every single time.
 
                         </p>
+                        
                         <h2 className="article-section-title">
-                            So what did we figure out?
+                            Any resources/further reading?
                         </h2>
                         <p className="article-section-text">
-                            Comparing two separate methods, namely Markov chains and simulation, we were able to figure out the average number of rolls to complete a game of snakes and ladders was ~39.2, if you play alone, like a dweeb.
+                            In terms of fields, linear algebra is quite important, and was probably the most poorly explained part of this article.
+                            I would recommend reading about stochastic vs deterministic processes, and the difference between the two.
+                            In terms of classifying what we did, we also constructed what I think was some form of Monte Carlo simulation to simulate and test our Markov chain result.
+                            In terms of other problems which have a similar gist, a canonical example of a markov chain is the Gambler's ruin concept, and an interesting problem (perhaps a bit more nuanced) is the St. Petersburg paradox.
+                            By and large, I would recommend just using wikipedia.
+                            
+                            
 
 
                         </p>
