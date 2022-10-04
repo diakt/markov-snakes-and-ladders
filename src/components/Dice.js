@@ -13,13 +13,21 @@ function Dice(props) {
         if (newPosition > 100) {
             newPosition = currpos;
         }
-        setTimeout(() => {
-            console.log('timeout in dice')
-            props.set_Dice(diceRoll);
-            props.set_PrevUserPosition(currpos);
-            props.set_UserPosition(newPosition);
-            props.set_MoveCounter(Number(props.move_Counter + 1));
-        }, 300);
+
+        props.set_Dice(diceRoll);
+        props.set_PrevUserPosition(currpos);
+        props.set_UserPosition(newPosition);
+        props.set_MoveCounter(Number(props.move_Counter + 1));
+
+
+
+        // setTimeout(() => {
+        //     console.log('timeout in dice')
+        //     props.set_Dice(diceRoll);
+        //     props.set_PrevUserPosition(currpos);
+        //     props.set_UserPosition(newPosition);
+        //     props.set_MoveCounter(Number(props.move_Counter + 1));
+        // }, 300);
 
 
 

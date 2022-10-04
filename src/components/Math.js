@@ -1,16 +1,69 @@
 import React from 'react';
 import { MathComponent } from "mathjax-react";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
 
 function Math() {
     //     $ \begin{bmatrix}
     // State & 0 & ... & 3 & 4 & 5 & 6 & 7 & 8 & 9 & ... & 13 & .. & 31 & ... & 100 \\
     // Chance & 0 & ... & 0 & 0 & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & 0 & ... & \frac{1}{6} & ... & \frac{1}{6} & ... & 0 
     // \end{bmatrix}  $
+    const Sim = () => {
+        const codeString = `
+        import random
+        import time
+        import numpy as np
+        np.random.seed(10)
 
+        class MarkovSim(object):
+            
+            
+            def __init__(self):
+                self.odds = [[1, 38], [4, 14], [9, 31], [
+                    21, 42], [28, 84], [36,44], [51, 67], [71, 91], [80, 100], [16, 6], [47, 26], [49, 11], [56, 53], [
+                    62, 19], [64, 60], [87, 24], [93, 73], [95, 75], [98, 78]]
+                self.markov_map = {}
+                for x, y in self.odds:
+                    self.markov_map[x]=y
+                for i in range(0,101):
+                    if i not in self.markov_map:
+                        self.markov_map[i]=i
+
+            def simulate(self, startpoint):
+                currentpoint = startpoint
+                counter = 0
+                while currentpoint < 100:
+                    stepped = currentpoint+random.randint(1, 6)
+                    if stepped <=100:
+                        newpoint = self.markov_map[stepped]
+                        if newpoint == 100:
+                            return counter+1
+                        else:
+                            currentpoint = newpoint
+                    counter += 1
+                return counter
+
+            def simulate_mult(self, startpoint, multiples):
+                start = time.time()
+                res = []
+                for _ in range(multiples):
+                    res.append(self.simulate(startpoint))
+                end = time.time()
+                return res, end-start
+
+        `;
+        return (
+            <SyntaxHighlighter language="python" style={docco} className='dingo'>
+                {codeString}
+            </SyntaxHighlighter>
+        );
+    };
 
 
     return (
         <div className='Math'>
+            
             <h1>Math of Snakes and Ladders</h1>
             <article className='math-article'>
                 {/* part 1 */}
@@ -45,7 +98,7 @@ function Math() {
                             It was a pretty immediate jump that I had to dunk on a younger version of myself and figure out the math.
 
                         </p>
-                  
+
 
                     </div>
                     <div className='article-section-imageright'>
@@ -54,7 +107,7 @@ function Math() {
 
                 </section>
 
-               
+
 
                 {/* part 3 */}
                 <section className="article-section">
@@ -84,7 +137,7 @@ function Math() {
 
                 </section>
 
-                
+
 
 
 
@@ -93,12 +146,12 @@ function Math() {
                         Snakes and Ladders is a big Markov chain!
                     </h2>
                     <img className="roll-from-3" src={require("../images/ROLLFROM3.png")} alt="Roll from 3" />
-                    
 
-                    
+
+
                     <p className="article-section-text-middle">
                         To quickly couch this claim, we can represent your position on the board as a state, and move to other states based on the probability we get from the die.
-                        We're going to figure out how many rolls it takes on average to finish a game of snakes and ladders. 
+                        We're going to figure out how many rolls it takes on average to finish a game of snakes and ladders.
                         We're going to need to discuss a couple of relevant parts of the Markov chain concept first, and then we will get to hashing out the details of the board.
                     </p>
 
@@ -130,8 +183,8 @@ function Math() {
                             You have an equal one in six chance of going to state 13, state 5, state 6, state 7, state 8, or state 32.
                             Why 13 instead of 4 and 32 instead of 9? Go take a look at the board again.
                         </p>
-                        
-                        
+
+
 
                     </div>
                     <div className='article-section-imageright'>
@@ -151,7 +204,7 @@ function Math() {
                             This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
                         </p> */}
                         <p className="article-section-text">
-                            
+
                             Take a look at the Markov chain on the right.
                             If we defined E as the first state, and A as the second, we could represent this markov chain in a matrix as the following:
                         </p>
@@ -202,7 +255,7 @@ function Math() {
                             Take a look at the Markov chain on the right, and its representation in a matrix below.
 
                         </p>
-                        
+
                         {/* Matrix row */}
                         <MathComponent
                             className='matrix-row'
@@ -217,7 +270,7 @@ function Math() {
                             State 1 is a transient state, because it can transition to state 2.
                             State 2 is an absorbing state, because it cannot transition to any other state.
                         </p>
-                        
+
 
 
                     </div>
@@ -291,7 +344,7 @@ function Math() {
                             display={true}
                         />
                         <p className="article-section-text">
-                            
+
 
                         </p>
 
@@ -314,7 +367,7 @@ function Math() {
 
 
 
-                
+
                 <h2>Part 2: Using our knowledge of Markov Chains with Snakes and Ladders</h2>
 
 
@@ -329,7 +382,7 @@ function Math() {
                         </p> */}
                         <p className="article-section-text">
                             There are generally two ways to approach a simple probability problem like this.
-                            The first is simulation, in which we simulate the game many times and calculate the average number of rolls. 
+                            The first is simulation, in which we simulate the game many times and calculate the average number of rolls.
                             We can make something that plays the game five million times and we can examine that data.
                             While this is *cough* effective, and pretty straightforward, in terms of total understanding, it's still not quite exact in a pedantic sense.
                         </p>
@@ -337,12 +390,10 @@ function Math() {
                             The second approach is using our newfound understanding of Markov Chains, in combination with some linear algebra on our newly created snakes and ladders matrix.
                             It will give us an exact answer, which is pretty cool.
                             Not only is exactness cool, but we can check our answer against the answer the simulation gives us, which is a good way to make sure I haven't led you on an elaborate ruse for some abstrusely justified sense of personal gratification.
+                            We will have to go through a few more quick concepts, and then we will be able to compute our final answer.
+
                             {/* Note deterministic, probabilistic differentiation */}
                         </p>
-                        
-
-
-
 
                     </div>
                     {/* <div className='article-section-imageright'>
@@ -353,17 +404,33 @@ function Math() {
                 <section className="article-section">
                     <div className='article-section-textleft'>
                         <h2 className="article-section-title">
-                            How do we use our Markov Chain Matrix?
+                            Quick concept: Matrix Multiplication
                         </h2>
 
                         <p className="article-section-text">
-                        If a matrix is a rectangle, a vector is a skyscraper. It has a width of one, and our vector would have a "height" of 101.
-                        If we were to multiply our matrix by a vector we created with a 1 (any number really) in the top row and 0s everywhere else, we would get back a vector with the same dimensions, but with the value of one sixth at all six of the possible positions in the vector we could go from 0 (i.e. state 38 (1 is a ladder), 2, 3, 14 (4 is a ladder), 5, and 6 ).
+                            Crazily enough, we can multiply matrices. They are incredibly useful for computer graphics, machine learning, and economic analysis.
                         </p>
-                        
 
-                        
-                  
+
+
+
+
+                        <p className="article-section-text">
+                            If a matrix is a rectangle, a vector is a skyscraper. It has a width of one, and can have any height.
+                            If we want to multiply a matrix with other matrix, or a matrix with a vector, the width of the matrix on the left needs to be the same as the height of the matrix/vector on the right.
+                            If we multiple an nxn matrix with an nxn matrix/nx1 vector, we will get a result with the height of the left matrix and the width of the right matrix/vector.
+                        </p>
+
+                        <p className="article-section-text">
+
+                            In the case to the right, we have a 5x3 matrix and a 3x1 vector. We can multiply them because the dimension numbers in the middle match (3 and 3), and will get a result with the dimesnions of the dimension numbers on the outside (5x1 vector).
+
+
+                        </p>
+
+
+
+
 
                     </div>
                     <div className='article-section-imageright'>
@@ -372,71 +439,178 @@ function Math() {
 
                 </section>
 
-
-
-
-
-                <section className="article-section-middle">
-                    <div className='article-section-text-middle'>
+                <section className="article-section">
+                    <div className='article-section-textleft'>
                         <h2 className="article-section-title">
-                            How do we use our Markov Chain Matrix?
+                            Quick concept: Identity matrix
+                        </h2>
+
+                        <p className="article-section-text">
+                            A type of matrix is the "identity matrix", which has value 1 in every diagonal element, and 0s everywhere else.
+                            These are very commonly used in linear algebra, and are valuable because anything we multiply with an identity matrix will equal... itself.
+
+                        </p>
+                        <p className="article-section-text">
+                            Think of it as the number 1, but in matrix form.
+                            An quick and dirty way to remember what an identity matrix is that anything multiplied with an identity matrix is "identical."
+                            Identity matrices are also invertible.
+                        </p>
+
+                        {/* <p className='mathjax-row'>
+                            <MathComponent className='lat-elt' tex={String.raw`P_{3,5} = \frac{1}{6}`} display={true} />
+                            <MathComponent className='lat-elt' tex={String.raw`P_{3,6} = \frac{1}{6}`} display={true} />
+                            <MathComponent className='lat-elt' tex={String.raw`P_{3,7} = \frac{1}{6}`} display={true} />
+                            <MathComponent className='lat-elt' tex={String.raw`P_{3,8} = \frac{1}{6}`} display={true} />
+                            <MathComponent className='lat-elt' tex={String.raw`P_{3,13} = \frac{1}{6}`} display={true} />
+                            <MathComponent className='lat-elt' tex={String.raw`P_{3,31} = \frac{1}{6}`} display={true} />
+                        </p> */}
+                        <p className="article-section-text">
+
+                        </p>
+
+                    </div>
+                    <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://andymath.com/wp-content/uploads/2019/07/Identity-Matrices.jpg" alt="Identity matrix" />
+                    </div>
+
+                </section>
+
+                <section className="article-section">
+                    <div className='article-section-textleft'>
+                        <h2 className="article-section-title">
+                            Quick concept: Invertible matrices
                         </h2>
                         {/* <p className="article-section-text">
                             This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
                         </p> */}
-                        
-                        
-
                         <p className="article-section-text">
-                        If a matrix is a rectangle, a vector is a skyscraper. It has a width of one, and our vector would have a "height" of 101.
-                        If we were to multiply our matrix by a vector we created with a 1 (any number really) in the top row and 0s everywhere else, we would get back a vector with the same dimensions, but with the value of one sixth at all six of the possible positions in the vector we could go from 0 (i.e. state 38 (1 is a ladder), 2, 3, 14 (4 is a ladder), 5, and 6 ).
-                        </p>
-                        
-                        <p className="article-section-text">
-                            
+                            The inverse of a matrix is a matrix that, when multiplied with the original matrix, will result in the identity matrix.
+                            Not every matrix is invertible.
 
                         </p>
 
+                        <p className="article-section-text">
+                            In more general math, if we have some number n, then its inverse is the number 1/n.
+                            Just as we can metaphorize the identity matrix to the number 1, we can metaphorize the inverse of a matrix to the number 1/n (for some n that we choose).
+                            An quick and dirty way to remember what an identity matrix is that anything multiplied with an identity matrix is "identical."
+                            As a tangential sidenote, identity matrices are also invertible.
+                        </p>
+
+                        {/* Matrix row */}
+
+                        <p className="article-section-text">
+
+                        </p>
+
+                    </div>
+                    <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://cdn.codespeedy.com/wp-content/uploads/2020/05/inverse_matrix.png" alt="Invertible Matrix" />
+                    </div>
+
+                </section>
 
 
+
+
+
+
+
+
+
+                <section className="article-section">
+                    <div className='article-section-textleft'>
+                        <h2 className="article-section-title">
+                            So how do we do this?
+                        </h2>
+                        {/* <p className="article-section-text">
+                            This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
+                        </p> */}
+                        <p className="article-section-text">
+                            We could create a vector with, say, 50 "people", at position 0, and continue to run it through our Markov matrix.
+                            Every time we multiply the matrix by our changing vector, we can think of it being a split of where the number goes, rather than a random roll.
+                            If we, for example, had 100 people at position 0 in our starting vector, we would split them into six groups and send them to each position.
+                        </p>
+                        <p className="article-section-text">
+
+                            If we were to watch how many people were at position 100 after every turn (e.g. people who finished the game), we could keep going until everyone was done, and then take the average of all of their arrival times.
+                            This would be accomplished by checking the position 100 at the end of every multiplication, so after multiplication 1, multiplication 2, etc.
+                            The downside of this is that it could take a very, very long for everyone to finish.
+                        </p>
+
+
+
+
+
+                    </div>
+                    <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://res.cloudinary.com/practicaldev/image/fetch/s--1oDCSTuK--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/uDVRscX.png" alt="Markov Chain" />
                     </div>
                     {/* <div className='article-section-imageright'>
                         <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
                     </div> */}
 
                 </section>
-                <section className="article-section-middle">
-                    <div className='article-section-text-middle'>
+                <section className="article-section">
+                    <div className='article-section-textleft'>
                         <h2 className="article-section-title">
-                            How do we now calculate the average number of rolls to complete the game?
+                            Is there a better option?
                         </h2>
                         {/* <p className="article-section-text">
                             This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
                         </p> */}
                         <p className="article-section-text">
-                            There are generally two ways to approach a simple probability problem like this.
-                            The first is simulation, in which we simulate the game many times and calculate the average number of rolls. 
+                            I'm so glad you asked.
+                        </p>
+                        <p className="article-section-text">
+                            There is a very elegant way to do this, using our concepts.
+
+                            If we have our Markov matrix, which we can call M, first we can remove all the rows and columns for the points we don't touch.
+                            These rows and columns correspond to the bottom of ladders (e.g. 1) or the tops of slides (e.g. 16).
+                            There are 19 snakes or ladders in the board, and removing them would yield an 82x82 matrix (from a 101x101 matrix).
+                            We also chop off the row/column corresponding to the corresponding state, so we remove the row/column corresponding to position 100, yielding an 81x81 matrix.
+                        </p>
+                        <p className="article-section-text">
+                            We create an identity matrix with the same dimensions as the matrix we just created.
+                            We then subtract our matrix from this identity matrix.
+                            The result is an invertible matrix, and we will invert it.
+                            If we add the first element of every row from this matrix together, we will be able to see that the expected number of rolls to complete a game of snakes and ladders on your own is ~39.223.
+                        </p>
+
+                    </div>
+                    <div className='article-section-imageright'>
+                        <img className="right-image" id="pic-board" src="https://res.cloudinary.com/practicaldev/image/fetch/s--1oDCSTuK--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/uDVRscX.png" alt="Markov Chain" />
+                    </div>
+
+                </section>
+
+
+                {/* ------------------------------------------------------------------------ */}
+                {/* Section 3 */}
+                {/* ------------------------------------------------------------------------ */}
+
+
+                <h2>Part 3: No chance that's actually right</h2>
+
+                <section className="article-section-middle">
+                    <div className='article-section-text-middle'>
+                        <h2 className="article-section-title">
+                            How do we check the validity of this answer?
+                        </h2>
+                        {/* <p className="article-section-text">
+                            This is the part where the linear algebra comes into play. We will manufacture a matrix that represents (for each state) the change that it will go to another state. It will have 101 rows (including 0) and 101 columns.
+                        </p> */}
+                        <p className="article-section-text">
+                            Like we said before, we can now use simulation to check if our answer is correct.
+                            We can create a process that mimicks randomness in order to play snakes and ladders and track the data.
                             We can make something that plays the game five million times and we can examine that data.
-                            While this is *cough* effective, and pretty straightforward, in terms of total understanding, it's still not quite exact in a pedantic sense.
-                        </p>
-                        <p className="article-section-text">
-                            The second approach is using our newfound understanding of Markov Chains, in combination with some linear algebra on our newly created snakes and ladders matrix.
-                            It will give us an exact answer, which is pretty cool.
-                            Not only is exactness cool, but we can check our answer against the answer the simulation gives us, which is a good way to make sure I haven't led you on an elaborate ruse for some abstrusely justified sense of personal gratification.
 
                         </p>
-                        
 
                         <p className="article-section-text">
-                        If a matrix is a square, a vector is a skyscraper. It has a width of one, and our vector would have a "height" of 101.
-                        If we were to multiply our matrix by a vector we created with a 1 (any number really) in the top row and 0s everywhere else, we would get back a vector with the same dimensions, but with the value of one sixth at all six of the possible positions in the vector we could go from 0 (i.e. state 38 (1 is a ladder), 2, 3, 14 (4 is a ladder), 5, and 6 ).
+                            Despite being a former R zealot, I have slowly been dragged kicking and screaming to appreciate Python for simulation.
+                            I built out a quick and dirty model to calculate the number of rolls.
+                            I'll include the code below.
                         </p>
-                        
-                        <p className="article-section-text">
-                            
-
-                        </p>
-
 
 
                     </div>
@@ -445,6 +619,15 @@ function Math() {
                     </div> */}
 
                 </section>
+
+                <Sim />
+                
+
+                <img className="sim-img" src={require("../images/100.png")} alt="100 rolls, with an average of... let me check" />
+                <img className="sim-img" src={require("../images/100000.png")} alt="100000 rolls, with an average of... let me check" />
+                <img className="sim-img" src={require("../images/5000000.png")} alt="5000000 rolls, with an average of... let me check" />
+                
+
 
 
 
@@ -478,14 +661,7 @@ function Math() {
 
 
 
-{/* <p className='mathjax-row'>
-                        <MathComponent className='lat-elt' tex={String.raw`P_{3,5} = \frac{1}{6}`} display={true} />
-                        <MathComponent className='lat-elt' tex={String.raw`P_{3,6} = \frac{1}{6}`} display={true} />
-                        <MathComponent className='lat-elt' tex={String.raw`P_{3,7} = \frac{1}{6}`} display={true} />
-                        <MathComponent className='lat-elt' tex={String.raw`P_{3,8} = \frac{1}{6}`} display={true} />
-                        <MathComponent className='lat-elt' tex={String.raw`P_{3,13} = \frac{1}{6}`} display={true} />
-                        <MathComponent className='lat-elt' tex={String.raw`P_{3,31} = \frac{1}{6}`} display={true} />
-                    </p> */}
+
 
 
 
