@@ -1,6 +1,7 @@
 import random
 import time
 import numpy as np
+np.random.seed(10)
 # muted with peacock
 
 
@@ -53,7 +54,7 @@ print(avg)
 import matplotlib.pyplot as plt
 
 
-plotto = plt.hist(counts, bins=30, color='blue')  # arguments are passed to np.histogram
+plotto = plt.hist(counts, bins=100, color='blue')  # arguments are passed to np.histogram
 
 plt.axvline(avg, color='red', linestyle='dashed', linewidth=1)
 
