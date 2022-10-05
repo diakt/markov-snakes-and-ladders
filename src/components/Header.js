@@ -6,16 +6,16 @@ function Header() {
         <div className="header-div" >
             <nav>
                 <Link to="/">
-                    <h1>CCL</h1>
+                    <h1 className='sections'>Snakes and Ladders</h1>
                 </Link>
                 <span>&nbsp;&nbsp;</span>
                 <Link to="/math">
-                    <h1>Math</h1>
+                    <h1 className='sections'>Math</h1>
                 </Link>
                 <span>&nbsp;&nbsp;</span>
-                <Link to="/history">
-                    <h1>History</h1>
-                </Link>
+                {/* <Link to="/history">
+                    <h1 className='sections'>History</h1>
+                </Link> */}
                 
             </nav>
 

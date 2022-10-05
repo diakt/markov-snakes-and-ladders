@@ -48,8 +48,6 @@ function Math() {
 
 
         Markov = MarkovNS()
-        outlay = pd.DataFrame(Markov.matrix, columns=[i for i in range(len(Markov.matrix))], index=[j for j in range(len(Markov.matrix))])
-        outlay.to_csv('outlay.csv',index=True, header=True, sep=',')
 
         chopped = [x[:-1] for x in Markov.matrix]
         chopped.pop()
@@ -161,7 +159,7 @@ function Math() {
                             However, I also wondered how much time it would take to win a game on average.
                             As the game itself is entirely determined by chance, there was.
                         </p>
-                        
+
 
 
                     </div>
@@ -182,16 +180,17 @@ function Math() {
                         <p className="article-section-text">
                             A markov process is (roughly) a system of probabilities that determine your chance of changing your “state” to another “state” at regular intervals.
                             An example of what one of these processes would look like is on the right.
-                            Take a look. Every time unit, we are either at “state 0” or “state 1.”
-                            If we are at state 0, we have a 50/50 chance of either staying at state 0 or traveling to state 1.
-                            If we are at state 1, we have different odds - a 65% chance of going to state 0, or a 35% chance of staying at state 1.
-                            Take a second to line up this description with how the graph in the middle looks.
-                            Props to whoever made this gif, they did god's work.
+                            Take a look. 
+
 
 
                         </p>
                         <p className="article-section-text">
-
+                            Every time unit, we are either at “state 0” or “state 1.”
+                            If we are at state 0, we have a 50/50 chance of either staying at state 0 or traveling to state 1.
+                            If we are at state 1, we have different odds - a 65% chance of going to state 0, or a 35% chance of staying at state 1.
+                            Take a second to line up this description with how the graph in the middle looks.
+                            Props to whoever made this.
 
                         </p>
                     </div>
@@ -252,16 +251,21 @@ function Math() {
                             We used the term states already, which are a big part of Markov chains.
                             It’s a fancy word for “where you are at a point in time.”
                             Your position in snakes and ladders can be considered a state.
-                            At state 3 (or any state on the board) you roll a die to see which state you will transition to.
-                            You have an equal one in six chance of going to state 13, state 5, state 6, state 7, state 8, or state 32.
-                            Why 13 instead of 4 and 32 instead of 9? Go take a look at the board again.
+
+                        </p>
+                        <p className="article-section-text">
+                            When you start learning about Markov chains, it can be useful to see coy examples like the right.
+                            In the example, we assume you are a singleminded running, ice cream eating, and sleeping machine.
+                            You do nothing else.
+                            At some time unit (usually with equal increments, so a second, a day, a millenia), you are always either running, eating ice cream, or sleeping.
+
                         </p>
 
 
 
                     </div>
                     <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://res.cloudinary.com/practicaldev/image/fetch/s--1oDCSTuK--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/uDVRscX.png" alt="Markov Chain" />
+                        <img className="right-image" id="pic-board" src="http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523011817/state_diagram_pfkfld.png" alt="Markov Chain" />
                     </div>
 
                 </section>
@@ -310,7 +314,7 @@ function Math() {
 
                 </section>
 
-                                 {/* time homogeneity, past invariant */}
+                {/* time homogeneity, past invariant */}
                 <section className="article-section">
                     <div className='article-section-textleft'>
                         <h2 className="article-section-title">
@@ -389,9 +393,7 @@ function Math() {
 
 
                     </div>
-                    {/* <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
-                    </div> */}
+
 
                 </section>
                 <section className="article-section-middle">
@@ -416,17 +418,12 @@ function Math() {
                             probability & 0 & ...& 0 & 0& 0 & 0& 0 & 0 & 1   \end{array} \right)`}
                             display={true}
                         />
-                        <p className="article-section-text">
 
-
-                        </p>
 
 
 
                     </div>
-                    {/* <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
-                    </div> */}
+
 
                 </section>
 
@@ -487,9 +484,7 @@ function Math() {
                         </p>
 
                     </div>
-                    {/* <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
-                    </div> */}
+
 
                 </section>
                 <section className="article-section">
@@ -499,7 +494,7 @@ function Math() {
                         </h2>
 
                         <p className="article-section-text">
-                            Crazily enough, we can multiply matrices. They are incredibly useful for computer graphics, machine learning, and economic analysis.
+                            Crazily enough, we can multiply matrices. They are incredibly useful for computer graphics, machine learning, and economic analysis (everything is linear algebra, apparently).
                         </p>
 
 
@@ -543,17 +538,8 @@ function Math() {
                             Identity matrices are also invertible.
                         </p>
 
-                        {/* <p className='mathjax-row'>
-                            <MathComponent className='lat-elt' tex={String.raw`P_{3,5} = \frac{1}{6}`} display={true} />
-                            <MathComponent className='lat-elt' tex={String.raw`P_{3,6} = \frac{1}{6}`} display={true} />
-                            <MathComponent className='lat-elt' tex={String.raw`P_{3,7} = \frac{1}{6}`} display={true} />
-                            <MathComponent className='lat-elt' tex={String.raw`P_{3,8} = \frac{1}{6}`} display={true} />
-                            <MathComponent className='lat-elt' tex={String.raw`P_{3,13} = \frac{1}{6}`} display={true} />
-                            <MathComponent className='lat-elt' tex={String.raw`P_{3,31} = \frac{1}{6}`} display={true} />
-                        </p> */}
-                        <p className="article-section-text">
 
-                        </p>
+
 
                     </div>
                     <div className='article-section-imageright'>
@@ -585,9 +571,7 @@ function Math() {
 
                         {/* Matrix row */}
 
-                        <p className="article-section-text">
 
-                        </p>
 
                     </div>
                     <div className='article-section-imageright'>
@@ -630,11 +614,9 @@ function Math() {
 
                     </div>
                     <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://res.cloudinary.com/practicaldev/image/fetch/s--1oDCSTuK--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/uDVRscX.png" alt="Markov Chain" />
+                        <img className="right-image" id="pic-board" src="https://media.istockphoto.com/photos/senior-man-shrugging-shoulders-picture-id91520053?k=20&m=91520053&s=170667a&w=0&h=L7yob0wL384IK-fyYZRevQ019sd6R8p08c3ZEFiaKNU=" alt="Older gentleman not understanding my poorly motivated mathematical claims" />
                     </div>
-                    {/* <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
-                    </div> */}
+
 
                 </section>
                 <section className="article-section">
@@ -666,7 +648,7 @@ function Math() {
 
                     </div>
                     <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://res.cloudinary.com/practicaldev/image/fetch/s--1oDCSTuK--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/uDVRscX.png" alt="Markov Chain" />
+                        <img className="right-image" id="pic-board" src="https://www.nicepng.com/png/full/229-2290111_harold-thumbs-up.png" alt="Markov Chain" />
                     </div>
 
                 </section>
@@ -723,16 +705,14 @@ function Math() {
                         </p>
 
                         <p className="article-section-text">
-                            Despite being a former R zealot, I have slowly been dragged kicking and screaming to appreciate Python for simulation.
+                            Despite being a former R zealot, I have been dragged kicking and screaming to appreciate Python for simulation.
                             I built out a quick and dirty model to calculate the number of rolls.
                             I'll include the code below.
                         </p>
 
 
                     </div>
-                    {/* <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
-                    </div> */}
+
 
                 </section>
 
@@ -757,15 +737,13 @@ function Math() {
                         </p>
 
                         <p className="article-section-text">
-                            There's a faint, sparkling chance that we might have been close to right.
+                            There's a faint, evanescent chance that we might have been close to right on the money.
 
                         </p>
 
 
                     </div>
-                    {/* <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
-                    </div> */}
+
 
                 </section>
 
@@ -777,7 +755,7 @@ function Math() {
                             So what did we figure out?
                         </h2>
                         <p className="article-section-text">
-                            Comparing two separate methods, namely Markov chains and simulation, we were able to figure out the average number of rolls to complete a game of snakes and ladders was ~39.2, if you play alone, like a dweeb.
+                            Comparing two separate methods, namely Markov chains and simulation, we were able to figure out the average number of rolls to complete a game of snakes and ladders was ~39.2, if you play alone, like a bored child.
 
 
                         </p>
@@ -785,7 +763,7 @@ function Math() {
                             How were these methods even different?
                         </h2>
                         <p className="article-section-text">
-                            A very good question.  
+                            A very good question.
                             Our Markov chains approach involved no randomness, and was purely "deterministic," which is a fancy way of saying that we will always get the same result from the same starting point.
                             We didn't simulate rolling a dice.
                             Instead, we thought of the transitions between states as almost splits in a river, diverting the flow of water to different places, and kept an eye on how much water went into our absorbing state every roll.
@@ -797,29 +775,27 @@ function Math() {
                             In the Markov chain approach, on the other hand, we get the same result, every single time.
 
                         </p>
-                        
+
                         <h2 className="article-section-title">
                             Any resources/further reading?
                         </h2>
                         <p className="article-section-text">
-                            In terms of fields, linear algebra is quite important, and was probably the most poorly explained part of this article.
+                            In terms of fields, linear algebra is quite important, and was by far the most poorly explained part of this project.
                             I would recommend reading about stochastic vs deterministic processes, and the difference between the two.
                             In terms of classifying what we did, we also constructed what I think was some form of Monte Carlo simulation to simulate and test our Markov chain result.
                             In terms of other problems which have a similar gist, a canonical example of a markov chain is the Gambler's ruin concept, and an interesting problem (perhaps a bit more nuanced) is the St. Petersburg paradox.
-                            By and large, I would recommend just using wikipedia.
-                            
-                            
+                            By and large, I would recommend just using Wikipedia.
+
+
 
 
                         </p>
 
-                        
+
 
 
                     </div>
-                    {/* <div className='article-section-imageright'>
-                        <img className="right-image" id="pic-board" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markovkate_01.svg/640px-Markovkate_01.svg.png" alt="Markov Chain" />
-                    </div> */}
+
 
                 </section>
 

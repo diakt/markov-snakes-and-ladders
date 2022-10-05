@@ -51,6 +51,14 @@ function Dice(props) {
             <button onClick={rollDice}> Roll Dice </button>
             <p className='dice-roll-result'> {props.curr_Dice} </p>
 
+            <button onClick={() => {
+                props.reset();
+            }}>Reset Game</button>
+
+
+
+
+
 
 
         </div>

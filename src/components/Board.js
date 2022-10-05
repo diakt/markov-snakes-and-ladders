@@ -107,7 +107,7 @@ function Board() {
     useEffect(() => {
         console.log('current userPosition is ', userPosition)
         if (userPosition == 100) {
-            alert("You Win!");
+            alert("You completed the game in " + moveCounter + " moves!");
             resetAfterCompletion();
         }
     }, [userPosition])
@@ -179,10 +179,10 @@ function Board() {
 
             <span>&nbsp;&nbsp;</span>
 
-            <div className='display-player-position'>
+            {/* <div className='display-player-position'>
                 Current dice is {dice}, current position is {userPosition}, counter is {moveCounter}
 
-            </div>
+            </div> */}
 
             <Dice
                 curr_UserPosition={userPosition}
@@ -193,16 +193,10 @@ function Board() {
                 set_Dice={setDice}
                 move_Counter={moveCounter}
                 set_MoveCounter={setMoveCounter}
+                reset={resetAfterCompletion}
             />
 
-        <div className = "reset-game">
-            <button onClick = {() => {
-                resetAfterCompletion();
-            }}>Reset Game</button>
-
-
-
-        </div>
+        
         </div>
         //matrix for markov chain of snakes and ladders
 
