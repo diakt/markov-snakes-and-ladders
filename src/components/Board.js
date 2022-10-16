@@ -126,11 +126,11 @@ function Board() {
                                 className='square-ladder'
                                 id={num}
                                 key={num}
-                                onClick={(event) => {
-                                    console.log("id", event.target.id, "ladder")
-                                    positionDisplay(event.target)
-                                    setUserPosition(event.target.id)
-                                }}
+                                // onClick={(event) => {
+                                //     console.log("id", event.target.id, "ladder")
+                                //     positionDisplay(event.target)
+                                //     setUserPosition(event.target.id)
+                                // }}
                             >
                                 {(num).toString()}{"  (" + elt + ")"}
                             </button>
@@ -144,10 +144,10 @@ function Board() {
                                 className='square-snake'
                                 id={num}
                                 key={num}
-                                onClick={(event) => {
-                                    console.log("id", event.target.id, "snake")
-                                    positionDisplay(event.target)
-                                }}
+                                // onClick={(event) => {
+                                //     console.log("id", event.target.id, "snake")
+                                //     positionDisplay(event.target)
+                                // }}
                             >
                                 {(num).toString()}{"  (" + elt + ")"}
                             </button>
@@ -159,10 +159,10 @@ function Board() {
                                 className='square-normal'
                                 id={num}
                                 key={num}
-                                onClick={(event) => {
-                                    console.log("id", event.target.id, "normal")
-                                    positionDisplay(event.target)
-                                }}
+                                // onClick={(event) => {
+                                //     console.log("id", event.target.id, "normal")
+                                //     positionDisplay(event.target)
+                                // }}
                             >
                                 {(num).toString()}
                             </button>
